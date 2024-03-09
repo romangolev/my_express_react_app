@@ -1,14 +1,21 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import SideBar from "./SideBar";
 import Header from "./Header";
+import MyModal from "./Modal";
 
 class App extends Component {
+    
+
     constructor(props) {
         super(props);
         this.state = { apiResponse: "" };
     }
+
+    handleSidePanelStatus = () => {
+        this.openPanel = !this.openPanel;
+        this.setState({ openPanel: !this.state.openPanel });
+    };
 
     callAPI() {
         fetch("http://localhost:9000/testAPI")
@@ -24,14 +31,27 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <header className="App-header">
-                    <Header></Header>
+                <Header></Header>
+
+                {/* <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo" />
                     <h1 className="App-title">Welcome to React</h1>
-                </header>
-                <SideBar></SideBar>
-                <p className="App-intro">{this.state.apiResponse}</p>
-                <button className="btn btn-primary">Click me</button>
+                </header> */}
+                <div className="container">
+                    <div className="row">
+                        <div className="col-sm">
+                            <SideBar></SideBar>
+                        </div>
+                        <div className="col-sm">
+                            <p className="App-intro">{this.state.apiResponse}</p>
+                        </div>
+                        <div className="col-sm">
+                        One of three columns
+                        </div>
+                    </div>
+                </div>
+
+                <MyModal></MyModal>
             </div>
         );
     }
